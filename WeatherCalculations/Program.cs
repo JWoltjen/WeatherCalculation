@@ -5,8 +5,8 @@ class Program
     static void Main(string[] args)
     {
         
-        var temperature = new Temperature();
-        var random = new Random();
+        Temperature temperature = new Temperature();
+        Random random = new Random();
         ConsoleKeyInfo input;
         do
         {
@@ -31,6 +31,7 @@ class Program
 
 class Temperature
 {
+    private List<int> temperatures = new List<int>();
     // create properties for min, max, average, sum, and count
     public int Min { get; private set; } = int.MaxValue;
     public int Max { get; private set; } = int.MinValue;
@@ -41,6 +42,7 @@ class Temperature
    // create a method to insert random temperatures from 1 to 100
    public void Insert(int temperature)
     {
+        temperatures.Add(temperature);
         if(temperature < Min)
         {
             Min = temperature;
