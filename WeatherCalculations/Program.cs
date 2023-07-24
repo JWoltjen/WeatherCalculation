@@ -7,16 +7,9 @@ class Program
         
         var temperature = new Temperature();
         var random = new Random();
-
-        while (true)
+        ConsoleKeyInfo input;
+        do
         {
-            Console.WriteLine("Press 'q' to quit, any other key to continue");
-            var input = Console.ReadKey();
-            if(input.Key == ConsoleKey.Q)
-            {
-                break;
-            }
-            Console.WriteLine();
             // loop over temperature method to insert 100 temps
             for (int i = 0; i < 101; i++)
             {
@@ -27,7 +20,12 @@ class Program
             Console.WriteLine($"Min temperature is {temperature.Min}");
             Console.WriteLine($"Max temperature is {temperature.Max}");
             Console.WriteLine($"Average temperature is {temperature.Average:F2}");
+            Console.WriteLine();
+            Console.WriteLine("Press 'q' to quit, any other key to continue");
+
+            input = Console.ReadKey();
         }
+        while (input.Key != ConsoleKey.Q);
     }
 }
 
