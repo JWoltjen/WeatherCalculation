@@ -1,12 +1,14 @@
 ﻿using System;
+using WeatherCalculations;
 
 class Program
 {
     static void Main(string[] args)
     {
         
-        Temperature temperature = new Temperature();
+        ITemperature temperature = new Temperature();
         Random random = new Random();
+        string[] words = new string[] { "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten" };
         ConsoleKeyInfo input;
         do
         {
@@ -16,10 +18,15 @@ class Program
                 // the random insertion should be between 1 and 100
                 temperature.Insert(random.Next(1, 101));
             }
+            for (int i = 0; i < 100; i++)
+            {
+                temperature.Insert(words[random.Next(0, 10)]);
+            }
+
             // output the min, max, and average values to the console
             Console.WriteLine($"Min temperature is {temperature.Min}");
             Console.WriteLine($"Max temperature is {temperature.Max}");
-            Console.WriteLine($"Average temperature is {temperature.Average:F2}");
+            Console.WriteLine($"Average temperature is {temperature.Average}");
             Console.WriteLine();
             Console.WriteLine("Press 'q' to quit, any other key to continue");
 
@@ -29,29 +36,3 @@ class Program
     }
 }
 
-class Temperature
-{
-    private List<int> temperatures = new List<int>();
-    // create properties for min, max, average, sum, and count
-    public int Min { get; private set; } = int.MaxValue;
-    public int Max { get; private set; } = int.MinValue;
-    public double Average => Sum / (double)Count;
-
-    private int Sum { get; set; }
-    private int Count { get; set; }
-   // create a method to insert random temperatures from 1 to 100
-   public void Insert(int temperature)
-    {
-        temperatures.Add(temperature);
-        if(temperature < Min)
-        {
-            Min = temperature;
-        }
-        if(temperature > Max)
-        {
-            Max = temperature;
-        }
-        Sum += temperature;
-        Count++;
-    }
-}
